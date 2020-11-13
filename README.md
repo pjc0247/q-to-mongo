@@ -44,3 +44,7 @@ __String Literal__
 */
 console.log(q2mongo('name:"Long Jinwoo" age:10'));
 ```
+
+Todo
+----
+* time strings such as `last_login:>3d`
