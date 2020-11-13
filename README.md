@@ -3,6 +3,12 @@ q-to-mongo
 
 query string to mongodb query
 
+Installation
+----
+```
+yarn add q-to-mongo
+```
+
 Example
 ----
 ```js
