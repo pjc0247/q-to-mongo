@@ -27,6 +27,7 @@ console.log(q2mongo('name:Jinwoo age:10'));
 console.log(q2mongo('name:Jinwoo age:10 -gender:male'));
 ```
 ```js
+/*
 {
   age:  { $gt: 10 },
 }
