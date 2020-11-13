@@ -33,9 +33,27 @@ const getValueType = (value) => {
   return [ValueType.Literal, value];
 };
 
+const timeString2Value = (input) => {
+  const matches = input.match(/^([0-9]+)([dhmM])$/);
+  if (!matches) return input;
+
+  const num = matches[0];
+  const unit = matches[1];
+
+  const today = Date.now();
+  if (unit === 'M')
+    return today - num * (3600 * 24 * 31);
+  if (unit === 'd')
+    return today - num * (3600 * 24);
+  if (unit === 'h')
+    return today - num * (3600);
+  if (unit === 'm')
+    return today - num * (60);
+};
 const unwrap = (input) => {
   if (input[0] === '"' && input[input.length - 1] === '"')
     return input.substr(1, input.length - 2);
+  input = timeString2Value(input);
   return input;
 };
 const buildValue = (input) => {
