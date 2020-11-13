@@ -21,7 +21,7 @@ console.log(q2mongo('name:Jinwoo age:10'));
 {
   name: "Jinwoo",
   age:  10,
-  male: { $not: 'male' }
+  gender: { $not: 'male' }
 }
 */
 console.log(q2mongo('name:Jinwoo age:10 -gender:male'));
