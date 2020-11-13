@@ -34,3 +34,13 @@ console.log(q2mongo('name:Jinwoo age:10 -gender:male'));
 */
 console.log(q2mongo('age:>10'));
 ```
+__String Literal__
+```js
+/*
+{
+  name: "Long Jinwoo",
+  age:  10
+}
+*/
+console.log(q2mongo('name:"Long Jinwoo" age:10'));
+```
