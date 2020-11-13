@@ -5,7 +5,7 @@ query string to mongodb query
 
 Example
 ----
-```
+```js
 const q2mongo = require('q-to-mongo');
 
 /*
@@ -16,7 +16,7 @@ const q2mongo = require('q-to-mongo');
 */
 console.log(q2mongo('name:Jinwoo age:10'));
 ```
-```
+```js
 /*
 {
   name: "Jinwoo",
@@ -26,7 +26,7 @@ console.log(q2mongo('name:Jinwoo age:10'));
 */
 console.log(q2mongo('name:Jinwoo age:10 -gender:male'));
 ```
-```
+```js
 {
   age:  { $gt: 10 },
 }
