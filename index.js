@@ -37,18 +37,18 @@ const timeString2Value = (input) => {
   const matches = input.match(/^([0-9]+)([dhmM])$/);
   if (!matches) return input;
 
-  const num = matches[0];
-  const unit = matches[1];
+  const num = matches[1];
+  const unit = matches[2];
 
   const today = Date.now();
   if (unit === 'M')
-    return today - num * (3600 * 24 * 31);
+    return new Date(today - num * (3600 * 24 * 31) * 1000);
   if (unit === 'd')
-    return today - num * (3600 * 24);
+    return new Date(today - num * (3600 * 24) * 1000);
   if (unit === 'h')
-    return today - num * (3600);
+    return new Date(today - num * (3600) * 1000);
   if (unit === 'm')
-    return today - num * (60);
+    return new Date(today - num * (60) * 1000);
 };
 const unwrap = (input) => {
   if (input[0] === '"' && input[input.length - 1] === '"')
@@ -60,8 +60,14 @@ const buildValue = (input) => {
   const [type, _value] = getValueType(input);
   const value = unwrap(_value);
 
-  if (type === ValueType.Literal)
-    return value;
+  if (type === ValueType.Literal) {
+    if (!isNaN(+value))
+      return +value;
+    if (value === 'true' || value === 'false')
+      return value === 'true' ? true : false;
+
+    return new RegExp(value);
+  }
   if (type === ValueType.Gt)
     return { $gt: value };
   if (type === ValueType.Gte)
@@ -74,8 +80,15 @@ const buildValue = (input) => {
     return { $in: value };
   return value;
 };
-const q2mongo = (input) => {
+const q2mongo = (input, defaultQueryBuilder = null) => {
   if (!input) return {};
+
+  if (!input.includes(':')) {
+    if (defaultQueryBuilder) {
+      return defaultQueryBuilder(input);
+    }
+    return {};
+  }
 
   const tokens = input.match(/(?:[^\s"]+|"[^"]*")+/g);
   const query = {};
