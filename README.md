@@ -65,13 +65,14 @@ queryUser(q);
 ```
 __example__
 ```js
-'john' => Not a valid query,
+// 'john' => Not a valid query,
+//           Fallback query builder will be executed.
 {
   email: new RegExp('john'),
   name: new RegExp('john'),
 }
 
-'name:john' => valid query
+// 'name:john' => valid query
 {
   name: new RegExp('john'),
 }
