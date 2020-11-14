@@ -1,7 +1,7 @@
 q-to-mongo
 ====
 
-query string to mongodb query
+human-friendly query string => mongodb query
 
 Installation
 ----
