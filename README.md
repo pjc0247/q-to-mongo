@@ -81,4 +81,5 @@ __example__
 Todo
 ----
 * user query to db field adaptor(converter)
-* time strings such as `last_login:>3d`
+* range `10~20`
+* or `a=1,2`
